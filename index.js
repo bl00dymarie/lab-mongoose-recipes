@@ -20,7 +20,16 @@ mongoose
     return self.connection.dropDatabase();
   })
   .then(() => {
-    // Run your code here, after you have insured that the connection was made
+    return Recipe.create({
+      title: "Mole",
+      cuisine: "Mexican",
+    })
+    .then(recipeFromDB => {
+      console.log(`A new recipe got created, it's: `, recipeFromDB.title, `and it's`, recipeFromDB.cuisine, `cuisine`)
+    })
+    .catch(err => {
+      console.log(`Error happened, `, err)
+    })     
   })
   .catch(error => {
     console.error('Error connecting to the database', error);
